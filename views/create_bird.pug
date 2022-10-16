@@ -1,0 +1,85 @@
+doctype html
+html(lang='en')
+    head
+        title COSC203: Birds of Aotearoa
+        meta(charset='utf-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        link(rel='stylesheet', href='/styles/layout.css')
+        link(rel='stylesheet', href='/styles/theme.css')
+        link(rel='stylesheet', href='/styles/conservation-status.css')
+        link(rel='stylesheet', href='/styles/cards.css')
+        script(href='/scripts/script.js')
+    body
+        include templates/header.pug
+        aside
+            a(href=`/birds`)
+                button Home
+
+        main
+            form(action='/birds/create' method='POST' enctype='multipart/form-data')
+                fieldset
+                    legend Common Names
+
+                    label(for='primary_name') Primary Name
+                    input(type='text' name='primary_name', required)
+
+                    label(for='english_name') English Name
+                    input(type='text' name='english_name', required)
+
+                    label(for='other_names') Other Names (New line for seperate names)
+                    textarea(name="other_names", cols="10", rows="10", required)
+
+                fieldset 
+                    legend Taxonomy  
+
+                    label(for='scientific_name') Scientific Name
+                    input(type='text' name='scientific_name', required)
+
+                    label(for='order') Order
+                    input(type='text' name='order', required)
+
+                    label(for='family') Family Name
+                    input(type='text' name='family', required)
+
+                fieldset 
+                    legend Size
+
+                    label(for='length_value') Length (cm)
+                    input(type='number' name='length_value' value='0', required)
+ 
+                    label(for='weight_value') Weight (g)
+                    input(type='number' name='weight_value' value='0', required)
+ 
+                fieldset
+                    legend Conservation
+
+                    label(for='status') Status
+                    select(name='status' id='status')
+                        option(selected class="Not-Threatened") Not Threatened
+                        option(class="Naturally-Uncommon") Naturally Uncommon
+                        option(class="Relict") Relict
+                        option(class="Recovering") Recovering
+                        option(class="Declining") Declining
+                        option(class="Nationally-Increasing") Nationally Increasing
+                        option(class="Nationally-Vulnerable") Nationally Vulnerable
+                        option(class="Nationally-Endangered") Nationally Endangered
+                        option(class="Nationally-Critical") Nationally Critical
+                        option(class="Data-Deficient") Data Deficient
+                    
+                fieldset
+                    legend Photo
+                    
+                    label(for='credit') Credit
+                    input(type='text' name='credit', required)
+
+                    label(for='upload') Upload a new photo
+                    input(type='file' name='upload' id='upload')
+
+                    label(for='preview') Preview
+                    img(id='preview' src='/birds/images/undefined' alt='Photo of ')
+
+                    input(type='text' name='source' id='source' readonly="readonly")
+
+                button(type='submit') Save Bird 
+
+        include templates/footer.pug
